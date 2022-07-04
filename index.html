@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form name="form" id="form">
+
+        Imie: <input type="text" id='name'><br>
+        Nazwisko: <input type="text" id="surname"><br>
+        Wiek: <input type="number" id="age"><br>
+        Email: <input type="email" id="mail"><br>
+        Opis: <input type="text" id="desc"><br>
+
+        <label for='gender'>Płeć: </label>
+        <select name="gender" id="sgender">
+            <option value="Mężczyzna">Mężczyzna</option>
+            <option value="Kobieta">Kobieta</option>
+        </select><br>
+        
+        <button id="save" type="button">Zapisz</button>
+        
+    </form>
+
+
+
+    <script>
+
+        const btn = document.querySelector('#save')    
+
+        const showData = () => {
+            let fName = document.querySelector('#name').value
+            let fSurname = document.querySelector('#surname').value
+            let fAge = parseInt(document.querySelector('#age').value)
+            let fMail = document.querySelector('#mail').value
+            let fDesc = document.querySelector('#desc').value
+            let fSelect = document.querySelector('#sgender')
+            let fGender = fSelect.value
+            let div = document.getElementById('result')
+
+            const validateEmail = (email) => {
+             return String(email)
+                .toLowerCase()
+                .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+        };
+
+        
+        if(fName.length !== 0){
+        if(fSurname.length !== 0){
+            if(!isNaN(fAge)){
+                if(validateEmail(fMail) !== null){
+                    if(div) {
+                        div.remove()
+                    }
+                        const resultDiv = document.createElement('div')
+                        document.body.appendChild(resultDiv)
+                        const pInfoName = document.createElement('p')
+                        const pInfoSurname = document.createElement('p')
+                        const pInfoAge = document.createElement('p')
+                        const pInfoMail = document.createElement('p')
+                        const pInfoDesc = document.createElement('p')
+                        const pInfoGender = document.createElement('p')
+                        resultDiv.append(pInfoName, pInfoSurname, pInfoAge, pInfoMail, pInfoDesc, pInfoGender)
+                        pInfoName.innerText = 'Imię: ' + fName 
+                        pInfoSurname.innerText = 'Nazwisko: ' + fSurname
+                        pInfoAge.innerText = 'Wiek: ' + fAge 
+                        pInfoMail.innerText = 'Email: ' + fMail
+                        pInfoDesc.innerText = 'Opis: ' + fDesc 
+                        pInfoGender.innerText = 'Płeć: ' + fGender
+                        resultDiv.setAttribute('id', 'result')
+        
+                    console.log(fName, fSurname, fAge, fMail, fDesc, fSelect, fGender);
+                }
+                else{
+                    alert('Niepoprawny email!')
+                }
+        
+            }else{
+                alert('Wiek musi być liczbą!')
+            }
+        }
+        else{
+            alert('Podaj nazwisko!')
+        }
+    }
+    else{
+        alert('Podaj imie!')
+    }
+}
+        btn.addEventListener('click', showData)
+    </script>
+</body>
+</html>
