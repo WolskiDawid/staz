@@ -14,6 +14,8 @@ let closeBtn = document.querySelector('.closeEr')
 const backAlert = document.createElement('div')
 const frontAlert = document.createElement('div')
 const btnEr = document.createElement('button')
+fGender.setAttribute('class', 'disabledOpt')
+fDate.setAttribute('class', 'disabledOpt')
 
 const validateEmail = (email) => {
     return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
@@ -74,6 +76,7 @@ const createError = (msg) => {
     fPesel.addEventListener('input', (e) => {        
         if(e.target.value.length == 11){
             let data = new Date()
+            let todayYear = new Date().getFullYear()
             let dayOfBirth = e.target.value.slice(4,6)
             let monthOfBirth = e.target.value.slice(2,4)
             let yearOfBirth = e.target.value.slice(0, 2)
@@ -143,6 +146,8 @@ const createError = (msg) => {
                     sum = 10 - sum
 
                     if(sum != elevnthNP){createError('Źle wpisany pesel!')}
+                    let ageDiff = todayYear - fAge.value
+                    if(year != ageDiff){createError('Źle wpisany pesel lub wiek!')}
 
                     console.log(sum, pesel[10]);
 
@@ -189,5 +194,47 @@ const createError = (msg) => {
         createError('Podaj imie!')
     }}
 
+    const checkNames = (e) => {
+        if(e.target.value == '' || !isNaN(e.target.value)){
+            e.target.style.border = 'solid 1px red'
+        }
+        else{
+            e.target.style.border = '0px'
+        }
+    }
+
+    const checkAge = (e) => {
+        if(e.target.value == '' || isNaN(e.target.value)){
+            e.target.style.border = 'solid 1px red'
+        }
+        else{
+            e.target.style.border = '0px'
+        }
+    }
+    
+    const isEmpty = (e) => {
+        if(e.target.value == ''){
+            e.target.style.border = 'solid 1px red'
+        }
+        else{
+            e.target.style.border = '0px'
+        }
+    }
+    
+    
+    
+    
+    
+    
+fName.addEventListener('blur', checkNames)
+fName.addEventListener('input', checkNames)
+fSurname.addEventListener('blur', checkNames)
+fSurname.addEventListener('input', checkNames)
+fAge.addEventListener('blur', checkAge)
+fAge.addEventListener('input', checkAge)
+fMail.addEventListener('blur', isEmpty)
+fMail.addEventListener('input', isEmpty)
+fPesel.addEventListener('blur', isEmpty)
+fPesel.addEventListener('input', isEmpty)
 btn.addEventListener('click', validateEverything)
 btnEr.addEventListener('click', closeError)
