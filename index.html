@@ -8,34 +8,38 @@
     <title>Formularz</title>
 </head>
 <body>
-    <!-- <div id="backAlert">
-        <div>
-            <img src="error.png">
-            <p>Błąd!</p> 
-            <p>Podano niepoprawny email!</p>
-            <button class="closeEr" type="button">Zamknij</button>
-        </div>
-    </div> -->
+        
+         <!-- tutaj alert jak wygloda
+        <div id="backAlert">
+            <div>
+                <img src="error.png">
+                <p>Błąd!</p> 
+                <p>Podano niepoprawny email!</p>
+                <button class="closeEr" type="button">Zamknij</button>
+            </div>
+        </div>-->
     
-    
-    
-    <form name="form" id="form">
+<div id="main">
+        <form name="form" id="form">
 
-        <label for="name">Imie: </label> <input type="text" id='name'><br>
-        <label for="surname">Nazwisko: </label> <input type="text" id="surname"><br>
-        <label for="age">Wiek: </label> <input type="number" id="age"><br>
-        <label for="mail">Email: </label> <input type="email" id="mail"><br>
-        <label for="desc">Opis: </label> <input type="text" id="desc"><br>
+            <label for="name"class="darkerLabel">Imie: </label> <input type="text" id='name' >
+            <label for="surname" class="darkerLabel">Nazwisko: </label> <input type="text" id="surname">
+            <label for="age"class="darkerLabel">Wiek: </label> <input type="number" id="age">
+            <label for="mail" class="darkerLabel">Email: </label> <input type="email" id="mail">
+            <label for="desc"class="darkerLabel">Opis: </label> <input type="text" id="desc">
+            <label for="pesel" class="darkerLabel">Pesel: </label> <input type="text" id="pesel" maxlength="11">
+            <label for="date" class="darkerLabel">Data urodzenia: </label> <input type="date" id="date" disabled>
         
-        <label for='sgender'>Płeć: </label>
-        <select name="gender" id="sgender">
-            <option value="Mężczyzna">Mężczyzna</option>
-            <option value="Kobieta">Kobieta</option>
-        </select><br>
+            <label for='sgender' class="darkerLabel">Płeć: </label>
+            <select name="gender" id="sgender" disabled>
+                <option value="Mężczyzna">Mężczyzna</option>
+                <option value="Kobieta">Kobieta</option>
+            </select>
         
-        <button id="save" type="button">Zapisz</button>
+            <button id="save" type="button" class="darkerLabel">Zapisz</button>
         
-    </form>
+        </form>
+</div>
     
 
     <script src="script.js" href="style.cssq"></script>
