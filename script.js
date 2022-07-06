@@ -1,3 +1,8 @@
+import { createError } from './export.js';
+import { validateEmail } from './valMail.js';
+import { addPrefixZero } from './addPrefixZero.js';
+import { stringContainsNumber } from './containNumber.js';
+
 const btn = document.querySelector('#save')    
 let fName = document.querySelector('#name')
 let fSurname = document.querySelector('#surname')
@@ -9,17 +14,8 @@ let fDesc = document.querySelector('#desc')
 let fSelect = document.querySelector('#sgender')
 let fGender = fSelect
 let div = null;
-let er = document.getElementById('er')
-let closeBtn = document.querySelector('.closeEr')
-const backAlert = document.createElement('div')
-const frontAlert = document.createElement('div')
-const btnEr = document.createElement('button')
 fGender.setAttribute('class', 'disabledOpt')
 fDate.setAttribute('class', 'disabledOpt')
-
-const validateEmail = (email) => {
-    return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
-}
 
 const showData = () => {
     const resultDiv = document.createElement('div')
@@ -48,30 +44,6 @@ const showData = () => {
     pInfoDate.setAttribute('class', 'darkerP')
     div = resultDiv
 }
-
-
-const createError = (msg) => {
-    backAlert.setAttribute('id', 'backAlert')
-        btnEr.setAttribute('class', 'closeEr')
-        btnEr.innerText = 'Zamknij'
-        backAlert.appendChild(frontAlert)
-        frontAlert.innerHTML = `<img src="error.png"><p>Błąd!</p><p>${msg}</p>`
-        document.body.append(backAlert)
-        frontAlert.appendChild(btnEr)
-    }
-    
-    const addPrefixZero = (number) => {
-        if(number > 9) {
-            return number
-        }
-        return `0${number}`
-    }
-
-    const closeError = () => {
-        backAlert.remove()
-        btnEr.remove()
-        frontAlert.remove()
-    }
     
     fPesel.addEventListener('input', (e) => {        
         if(e.target.value.length == 11){
@@ -140,8 +112,8 @@ const createError = (msg) => {
     })
     
     const validateEverything = () => {
-        if(fName.value.length !== 0){
-            if(fSurname.value.length !== 0){
+        if(!fName.value.length == '' && !stringContainsNumber(fName.value)){
+            if(!fSurname.value.length == '' && !stringContainsNumber(fName.value)){
             if(!isNaN(parseInt(fAge.value))){
                 if(validateEmail(fMail.value)){
                     if(div) {
@@ -163,40 +135,50 @@ const createError = (msg) => {
             }
         }
         else{
-            createError('Podaj nazwisko!')
+            createError('Błędne nazwisko!')
         }
     }
     else{
-        createError('Podaj imie!')
+        createError('Błędne imie!')
     }}
 
     const checkNames = (e) => {
-        if(e.target.value == '' || !isNaN(e.target.value)){
-            e.target.style.border = 'solid 1px red'
-        }
-        else{
-            e.target.style.border = '0px'
-        }
+        (e.target.value == '' || stringContainsNumber(e.target.value)) ? e.target.style.border = 'solid 1px red' : e.target.style.border = '0px'
+    }
+    const checkAge = (e) => {
+        (e.target.value == '' || stringContainsNumber(e.target.value)) ? e.target.style.border = 'solid 1px red' : e.target.style.border = '0px'
+    }
+    const isEmpty = (e) => {
+        (e.target.value == '') ? e.target.style.border = 'solid 1px red' : e.target.style.border = '0px'
     }
 
-    const checkAge = (e) => {
-        if(e.target.value == '' || isNaN(e.target.value)){
-            e.target.style.border = 'solid 1px red'
-        }
-        else{
-            e.target.style.border = '0px'
-        }
-    }
+    // const checkNames = (e) => {
+    //     if(e.target.value == '' || !isNaN(e.target.value)){
+    //         e.target.style.border = 'solid 1px red'
+    //     }
+    //     else{
+    //         e.target.style.border = '0px'
+    //     }
+    // }
+
+    // const checkAge = (e) => {
+    //     if(e.target.value == '' || isNaN(e.target.value)){
+    //         e.target.style.border = 'solid 1px red'
+    //     }
+    //     else{
+    //         e.target.style.border = '0px'
+    //     }
+    // }
     
-    const isEmpty = (e) => {
-        if(e.target.value == ''){
-            e.target.style.border = 'solid 1px red'
-        }
-        else{
-            e.target.style.border = '0px'
-        }
-    }
-    
+    // const isEmpty = (e) => {
+    //     if(e.target.value == ''){
+    //         e.target.style.border = 'solid 1px red'
+    //     }
+    //     else{
+    //         e.target.style.border = '0px'
+    //     }
+    // }
+
 
     
 fName.addEventListener('blur', checkNames)
@@ -210,4 +192,3 @@ fMail.addEventListener('input', isEmpty)
 fPesel.addEventListener('blur', isEmpty)
 fPesel.addEventListener('input', isEmpty)
 btn.addEventListener('click', validateEverything)
-btnEr.addEventListener('click', closeError)

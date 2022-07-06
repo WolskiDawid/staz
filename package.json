@@ -4,19 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "parcel index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WolskiDawid/staz.git"
   },
-  "author": "Dawid Wolski",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/WolskiDawid/staz/issues"
   },
   "homepage": "https://github.com/WolskiDawid/staz#readme",
-  "devDependencies": {
+  "dependencies": {
     "parcel": "^2.6.2"
   }
 }
