@@ -21,33 +21,7 @@ const validateEmail = (email) => {
     return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
 }
 
-const showData = () => {
-    const resultDiv = document.createElement('div')
-    document.body.appendChild(resultDiv)
-    const pInfoName = document.createElement('p')
-    const pInfoSurname = document.createElement('p')
-    const pInfoAge = document.createElement('p')
-    const pInfoMail = document.createElement('p')
-    const pInfoDesc = document.createElement('p')
-    const pInfoGender = document.createElement('p')
-    const pInfoDate = document.createElement('p')
-    const pInfoPesel = document.createElement('p')
-    resultDiv.append(pInfoName, pInfoSurname, pInfoAge, pInfoMail, pInfoDesc, pInfoGender, pInfoDate, pInfoPesel)
-    pInfoName.innerText = 'Imię: ' + fName.value
-    pInfoSurname.innerText = 'Nazwisko: ' + fSurname.value
-    pInfoAge.innerText = 'Wiek: ' + fAge.value
-    pInfoMail.innerText = 'Email: ' + fMail.value
-    pInfoDesc.innerText = 'Opis: ' + fDesc.value
-    pInfoGender.innerText = 'Płeć: ' + fGender.value
-    pInfoDate.innerText = 'Data urodzenia: ' + fDate.value
-    pInfoPesel  .innerText = 'Pesel: ' + fPesel.value
-    resultDiv.setAttribute('id', 'result')
-    pInfoName.setAttribute('class', 'darkerP')
-    pInfoAge.setAttribute('class', 'darkerP')
-    pInfoDesc.setAttribute('class', 'darkerP')
-    pInfoDate.setAttribute('class', 'darkerP')
-    div = resultDiv
-}
+
 
 
 const createError = (msg) => {
@@ -197,17 +171,53 @@ const createError = (msg) => {
         }
     }
     
+const setDarker = (elem) => {
+    elem.setAttribute('class', 'darkerP')
+}
+const inputs = {
+    name: {
+        label: 'Imię',
+        re: /^[A-Za-z]+$/
+    },
+    surname: {
+        label: 'Nazwisko',
+        extraCss: setDarker
+    },
+}
 
+const validate = (elem, re = null) => {
+    if((re && !re.test(elem.value) || !elem.value)){
+        elem.style.border = 'solid 1px red'
+    }
+    else
+    {
+        elem.style.border = '0px'
+    }
+}
+const form = document.forms['form']
+for(name in inputs) {
+    let input = form[name]
+    input.addEventListener('blur', () => {
+        validate(input,inputs[name].regex)
+    })
+    input.addEventListener('input', () => {
+        validate(input,inputs[name].regex)
+    })
+}
     
-fName.addEventListener('blur', checkNames)
-fName.addEventListener('input', checkNames)
-fSurname.addEventListener('blur', checkNames)
-fSurname.addEventListener('input', checkNames)
-fAge.addEventListener('blur', checkAge)
-fAge.addEventListener('input', checkAge)
-fMail.addEventListener('blur', isEmpty)
-fMail.addEventListener('input', isEmpty)
-fPesel.addEventListener('blur', isEmpty)
-fPesel.addEventListener('input', isEmpty)
+
+const showData = () => {
+    const resultDiv = document.createElement('div')
+    let inputSettings = inputs[name]
+    for(name in inputs) {
+        const p = document.createElement('p')
+        inputSettings.innerText =  inputSettings.label+' ' + form[name].value
+        if(inputSettings.extraCss) {
+            inputSettings.extraCss(form[name])
+        }
+    }
+    div = resultDiv
+}
+    
 btn.addEventListener('click', validateEverything)
 btnEr.addEventListener('click', closeError)
