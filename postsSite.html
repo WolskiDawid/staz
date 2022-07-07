@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Formularz</title>
+</head>
+<body>
+        
+         <!-- //tutaj alert jak wygloda
+        <div id="backAlert">
+            <div>
+                <img src="C:/Users/admin/Desktop/zadanie/error.png">
+                <p>Błąd!</p> 
+                <p>Podano niepoprawny email!</p>
+                <button class="closeEr" type="button">Zamknij</button>
+            </div>
+        </div> -->
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" id="sideBarClose">&times;</a>
+    <a href="index.html">Strona główna</a>
+    <a href="postsSite.html">Posty</a>
+</div>
+
+<span onclick="openNav()" id="sideBarOpen">☰</span>
+    
+<div id="main">
+
+        <form name="form" id="form">
+
+            <label for="name"class="darkerLabel">Imie*: </label> <input type="text" id='name' >
+            <label for="surname" class="darkerLabel">Nazwisko*: </label> <input type="text" id="surname">
+            <label for="mail" class="darkerLabel">Email*: </label> <input type="email" id="mail">
+            <label for="desc"class="darkerLabel">Opis: </label> <input type="text" id="desc" maxlength="150">
+            <label for="pesel" class="darkerLabel">Pesel*: </label> <input type="text" id="pesel" maxlength="11">
+            <label for="age"class="darkerLabel">Wiek*: </label> <input type="number" id="age" disabled>
+            <label for="date" class="darkerLabel">Data urodzenia: </label> <input type="date" id="date" disabled>
+        
+            <label for='sgender' class="darkerLabel">Płeć: </label>
+            <select name="gender" id="sgender" disabled>
+                <option value="Mężczyzna">Mężczyzna</option>
+                <option value="Kobieta">Kobieta</option>
+            </select>
+        
+            <button id="save" type="button" class="darkerLabel">Zapisz</button>
+            
+            <p class="darkerLabel">* - obowiązkowe</p>
+        </form>
+</div>
+    
+    <script src="script.js" type="module"></script>
+</body>
+</html>

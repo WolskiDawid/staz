@@ -1,6 +1,7 @@
 import { createError } from './errorScript';
 import { validateEmail } from './valMail.js';
 import { addPrefixZero } from './addPrefixZero.js';
+import { getPosts } from './api.js';
 import { stringContainsNumber } from './containNumber.js';  
 
 const btn = document.querySelector('#save')    
@@ -14,6 +15,9 @@ let fDesc = document.querySelector('#desc')
 let fSelect = document.querySelector('#sgender')
 let fGender = fSelect
 let div = null;
+const sideBarClose = document.querySelector('#sideBarClose')
+const sideBarOpen = document.querySelector('#sideBarOpen')
+fAge.setAttribute('class', 'disabledOpt')
 fGender.setAttribute('class', 'disabledOpt')
 fDate.setAttribute('class', 'disabledOpt')
 
@@ -50,14 +54,10 @@ const showData = () => {
         if(e.target.value.length == 11){
             let data = new Date()
             let data2 = new Date()
-            let todayYear = new Date().getFullYear()
-            let todayDate = data2.getFullYear() + '-' + (addPrefixZero(data2.getMonth()+1)) + '-' + addPrefixZero(data2.getDate());
             let dayOfBirth = e.target.value.slice(4,6)
             let monthOfBirth = e.target.value.slice(2,4)
             let yearOfBirth = e.target.value.slice(0, 2)
             let genderNumber = e.target.value.slice(9, 10)
-            
-            console.log(yearOfBirth, monthOfBirth%20)
 
             let multiplier = Math.floor(monthOfBirth/20)
             let year = 1800;
@@ -93,27 +93,30 @@ const showData = () => {
             tenthNP = tenthNP %10
 
             data = year + '-' + monthOfBirth + '-' + dayOfBirth
+            todayDate = data2.getFullYear() + '-' + addPrefixZero((data2.getMonth()+1)) + '-' + addPrefixZero(data2.getDate());
             
             let sum = firstNP + secondNP + thirdNP + fourthNP + fifthNP + sixthNP + seventhNP + eighthNP + ninthNP + tenthNP
             sum = sum.toString().slice(1,2)
             sum = 10 - sum
 
+            if(sum != elevnthNP){createError('Źle wpisany pesel!', fPesel)}
+
             let dataToCheck1 = monthOfBirth + '-' + dayOfBirth
             let dataToCheckToday = (addPrefixZero(data2.getMonth()+1)) + '-' + addPrefixZero(data2.getDate());
+            let ageDiff = data2.getFullYear() - year
+            
+            console.log(dataToCheckToday, dataToCheck1, dataToCheckToday<=dataToCheck1);
 
-            if(sum != elevnthNP){createError('Źle wpisany pesel!', fPesel)}
-            let ageDiff = todayYear - fAge.value
-
-                if(dataToCheckToday >= dataToCheck1){
-                    if(year != ageDiff){createError('Źle wpisany pesel lub wiek!', fPesel)}
-                } 
-                else{
-                    if(year != ageDiff-1){createError('Źle wpisany pesel lub wiek!', fPesel)}
-                }
+            if(dataToCheckToday <= dataToCheck1){
+                fAge.value = ageDiff - 1
+            } 
+            else{
+                fAge.value = ageDiff
+            }
 
             console.log(sum, pesel[10]);
 
-            console.log(year, monthOfBirth, dayOfBirth);
+            // console.log(year, monthOfBirth, dayOfBirth);
             if(genderNumber % 2 == 0){
                 fGender.value = 'Kobieta'
             }
@@ -127,7 +130,6 @@ const showData = () => {
     const validateEverything = () => {
         if(!fName.value.length == '' && !stringContainsNumber(fName.value)){
             if(!fSurname.value.length == '' && !stringContainsNumber(fName.value)){
-            if(!isNaN(parseInt(fAge.value))){
                 if(validateEmail(fMail.value)){
                     if(div) {
                         div.remove()
@@ -141,12 +143,7 @@ const showData = () => {
                 }
                 else{
                     createError('Błędnie podany email!', fMail)
-                }
-        
-            }else{
-                createError('Wiek musi być liczbą!', fAge)
-            }
-        }
+                }}
         else{
             createError('Błędne nazwisko!', fSurname)
         }
@@ -165,8 +162,17 @@ const showData = () => {
         (e.target.value == '') ? e.target.style.border = 'solid 1px red' : e.target.style.border = '0px'
     }
 
+    const openNav = () => {
+        document.getElementById("mySidenav").style.width = "250px";   
+    }
+    
+    const closeNav = () => {
+        document.getElementById("mySidenav").style.width = "0";
+    }
 
 
+sideBarOpen.addEventListener('click', openNav)
+sideBarClose.addEventListener('click', closeNav)
 fName.addEventListener('blur', checkNames)
 fName.addEventListener('input', checkNames)
 fSurname.addEventListener('blur', checkNames)
