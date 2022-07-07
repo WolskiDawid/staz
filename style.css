@@ -53,7 +53,7 @@
 #result{
     margin: auto;
     background-color: #F08A5D;
-    width: 500px;
+    width: 540px;
     height: 300px;
     display: flex;
     justify-content: center;
@@ -163,6 +163,7 @@
 }
 
 .sidenav a {
+    font-family:Verdana, Geneva, Tahoma, sans-serifz ;
     padding: 8px 8px 8px 32px;
     margin: 8px 0px 5px 0px;
     text-decoration: none;
@@ -193,7 +194,7 @@
 
 #sideBarOpen{
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     display: flex;
     color: #ff2222;
     width: 70px;
@@ -204,3 +205,8 @@
     justify-content: center;
 }
 
+#apiP{
+    background-color: #b60000;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+}
