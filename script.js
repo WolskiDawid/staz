@@ -1,7 +1,7 @@
-import { createError } from './export.js';
+import { createError } from './errorScript';
 import { validateEmail } from './valMail.js';
 import { addPrefixZero } from './addPrefixZero.js';
-import { stringContainsNumber } from './containNumber.js';
+import { stringContainsNumber } from './containNumber.js';  
 
 const btn = document.querySelector('#save')    
 let fName = document.querySelector('#name')
@@ -33,6 +33,7 @@ const showData = () => {
     pInfoSurname.innerText = 'Nazwisko: ' + fSurname.value
     pInfoAge.innerText = 'Wiek: ' + fAge.value
     pInfoMail.innerText = 'Email: ' + fMail.value
+    fDesc.value == '' ? fDesc.value = 'brak' : fDesc.value = fDesc.value
     pInfoDesc.innerText = 'Opis: ' + fDesc.value
     pInfoGender.innerText = 'Płeć: ' + fGender.value
     pInfoDate.innerText = 'Data urodzenia: ' + fDate.value
@@ -48,7 +49,9 @@ const showData = () => {
     fPesel.addEventListener('input', (e) => {        
         if(e.target.value.length == 11){
             let data = new Date()
+            let data2 = new Date()
             let todayYear = new Date().getFullYear()
+            let todayDate = data2.getFullYear() + '-' + (addPrefixZero(data2.getMonth()+1)) + '-' + addPrefixZero(data2.getDate());
             let dayOfBirth = e.target.value.slice(4,6)
             let monthOfBirth = e.target.value.slice(2,4)
             let yearOfBirth = e.target.value.slice(0, 2)
@@ -66,7 +69,7 @@ const showData = () => {
 
     
             if (dayOfBirth > 31) {
-                createError('Źle wpisany pesel!')
+                createError('Źle wpisany pesel!', fPesel)
             }
             const pesel = e.target.value
             firstNP = pesel[0] * 1
@@ -88,18 +91,28 @@ const showData = () => {
             seventhNP = seventhNP %10
             eighthNP = eighthNP %10
             tenthNP = tenthNP %10
-    
+
+            data = year + '-' + monthOfBirth + '-' + dayOfBirth
+            
             let sum = firstNP + secondNP + thirdNP + fourthNP + fifthNP + sixthNP + seventhNP + eighthNP + ninthNP + tenthNP
             sum = sum.toString().slice(1,2)
             sum = 10 - sum
 
-            if(sum != elevnthNP){createError('Źle wpisany pesel!')}
+            let dataToCheck1 = monthOfBirth + '-' + dayOfBirth
+            let dataToCheckToday = (addPrefixZero(data2.getMonth()+1)) + '-' + addPrefixZero(data2.getDate());
+
+            if(sum != elevnthNP){createError('Źle wpisany pesel!', fPesel)}
             let ageDiff = todayYear - fAge.value
-            if(year != ageDiff){createError('Źle wpisany pesel lub wiek!')}
+
+                if(dataToCheckToday >= dataToCheck1){
+                    if(year != ageDiff){createError('Źle wpisany pesel lub wiek!', fPesel)}
+                } 
+                else{
+                    if(year != ageDiff-1){createError('Źle wpisany pesel lub wiek!', fPesel)}
+                }
 
             console.log(sum, pesel[10]);
 
-            data = year + '-' + monthOfBirth + '-' + dayOfBirth
             console.log(year, monthOfBirth, dayOfBirth);
             if(genderNumber % 2 == 0){
                 fGender.value = 'Kobieta'
@@ -122,65 +135,38 @@ const showData = () => {
                         if(!isNaN(parseInt(fPesel.value))){
                             showData()
                         }else{
-                            createError('Źle wpisany pesel!')
+                            createError('Źle wpisany pesel!', fPesel)
                         }
 
                 }
                 else{
-                    createError('Błędnie podany email!')
+                    createError('Błędnie podany email!', fMail)
                 }
         
             }else{
-                createError('Wiek musi być liczbą!')
+                createError('Wiek musi być liczbą!', fAge)
             }
         }
         else{
-            createError('Błędne nazwisko!')
+            createError('Błędne nazwisko!', fSurname)
         }
     }
     else{
-        createError('Błędne imie!')
+        createError('Błędne imie!', fName)
     }}
 
     const checkNames = (e) => {
         (e.target.value == '' || stringContainsNumber(e.target.value)) ? e.target.style.border = 'solid 1px red' : e.target.style.border = '0px'
     }
     const checkAge = (e) => {
-        (e.target.value == '' || stringContainsNumber(e.target.value)) ? e.target.style.border = 'solid 1px red' : e.target.style.border = '0px'
+        (e.target.value == '' || !stringContainsNumber(e.target.value)) ? e.target.style.border = 'solid 1px red' : e.target.style.border = '0px'
     }
     const isEmpty = (e) => {
         (e.target.value == '') ? e.target.style.border = 'solid 1px red' : e.target.style.border = '0px'
     }
 
-    // const checkNames = (e) => {
-    //     if(e.target.value == '' || !isNaN(e.target.value)){
-    //         e.target.style.border = 'solid 1px red'
-    //     }
-    //     else{
-    //         e.target.style.border = '0px'
-    //     }
-    // }
-
-    // const checkAge = (e) => {
-    //     if(e.target.value == '' || isNaN(e.target.value)){
-    //         e.target.style.border = 'solid 1px red'
-    //     }
-    //     else{
-    //         e.target.style.border = '0px'
-    //     }
-    // }
-    
-    // const isEmpty = (e) => {
-    //     if(e.target.value == ''){
-    //         e.target.style.border = 'solid 1px red'
-    //     }
-    //     else{
-    //         e.target.style.border = '0px'
-    //     }
-    // }
 
 
-    
 fName.addEventListener('blur', checkNames)
 fName.addEventListener('input', checkNames)
 fSurname.addEventListener('blur', checkNames)
