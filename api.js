@@ -1,7 +1,7 @@
 // GET
 import axios from 'axios';
 
-let mainDiv = document.querySelector('#main')
+let divsDiv = document.querySelector('#divs')
 
 export function getPosts() {
     axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -18,12 +18,14 @@ const closeNav = () => {
 }
 const buildDivs = (rows) => {
     for(let i=0; i < rows.length; i++) {
-        let pDiv = document.createElement('p')
+        let pDiv = document.createElement('div')
         pDiv.setAttribute('id', 'apiP')
-        pDiv.innerText = rows[i].body + rows[i].id + rows[i].title + rows[i].userId
-        mainDiv.appendChild(pDiv)
+        pDiv.innerHTML = `<div class='divUnder'>Body: ${rows[i].body}</div><div class='divUnder'>ID: ${rows[i].id}</div><div class='divUnder'>Tytuł: ${rows[i].title}</div><div class='divUnder'>ID Użytkownika: ${rows[i].userId}</div>`
+        divsDiv.appendChild(pDiv)   
     }
 }
+
+
 
 
 sideBarOpen.addEventListener('click', openNav)

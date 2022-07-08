@@ -1,19 +1,35 @@
 *{
     padding: 0;
     margin: 0;
-    background-color: #fff156
+    background-color: #fff156;
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box;
+    position: relative;
 } 
   
 #main{
     margin: auto;
     background-color: #F08A5D;
     width: 500px;
-    height: 550px;
+    min-height: 550px;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: margin-left .5s;
     padding: 20px;
+}
+
+#postsMain{
+    margin: auto;
+    background-color: #F08A5D;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: margin-left .5s;
+    padding: 20px;
+
 }
 
 #form{
@@ -53,7 +69,7 @@
 #result{
     margin: auto;
     background-color: #F08A5D;
-    width: 540px;
+    width: 500px;
     height: 300px;
     display: flex;
     justify-content: center;
@@ -148,24 +164,25 @@
 }
 
 .sidenav a:first-of-type {
-    border-radius: 25px;
-    padding: 8px 8px 8px 8px;
-    margin: 5px 0px 5px 0px;
-    text-decoration: none;
-    font-size: 25px;
     text-align: center;
     color: #d60000;
-    background-color: rgb(255, 153, 0); 
-    border: 1px solid rgb(221, 181, 0);
+    width: 40px;
+    height: 40px;
+    background-color: #f90;
+    border: 1px solid #ddb500;
+    border-radius: 50%;
+    margin: 0% 0% 10% 70%;
+    padding: 2px;
+    font-size: 26px;
+    text-decoration: none;
+    transition: all .3s;
     display: block;
-    transition: 0.3s;
-    width: 30px;
 }
 
 .sidenav a {
     font-family:Verdana, Geneva, Tahoma, sans-serifz ;
     padding: 8px 8px 8px 32px;
-    margin: 8px 0px 5px 0px;
+    margin: 0px 0px 5px 0px;
     text-decoration: none;
     font-size: 25px;
     color: #d60000;
@@ -209,4 +226,16 @@
     background-color: #b60000;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 16px;
+    max-width: 500px;
+}
+
+.divUnder{
+    background-color: #b60000;
+    font-size: 20px;
+}
+
+#divs{
+    width: 450px;
+    height: 100%;
+    background-color: #b60000; 
 }
