@@ -8,26 +8,23 @@
     <title>Formularz</title>
 </head>
 <body>
-        
-         <!-- //tutaj alert jak wygloda
-        <div id="backAlert">
-            <div>
-                <img src="C:/Users/admin/Desktop/zadanie/error.png">
-                <p>Błąd!</p> 
-                <p>Podano niepoprawny email!</p>
-                <button class="closeEr" type="button">Zamknij</button>
-            </div>
-        </div> -->
 
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" id="sideBarClose">&times;</a>
     <a href="index.html">Strona główna</a>
     <a href="postsSite.html">Posty</a>
 </div>
-
 <span onclick="openNav()" id="sideBarOpen">☰</span>
+
     
 <div id="postsMain">
+
+    <form id="filtersForm">
+        <input type="text" placeholder="ID" class="filterFormC" id="fId">
+        <input type="text" placeholder="Tytuł" class="filterFormC" id="fTitle">
+        <input type="text" placeholder="Body" class="filterFormC" id="fBody">
+        <input type="text" placeholder="ID Użytkownika" class="filterFormC" id="fUserId">
+    </form>
 
     <div id="divs">
 
