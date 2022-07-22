@@ -1,4 +1,6 @@
-import {getPosts as apiGet, getPosts} from './api.js'
+import {getPosts as apiGet} from './api.js'
+let divsDiv = document.querySelector('#divs')
+let fBtnT = document.querySelector('#fBtnT')
 let rows = []
 
 const getPosts = async () => {
@@ -16,11 +18,55 @@ const buildDivs = (rows) => {
 }
 
 const sortRows = () => {
-    const sortedRows = rows.sort()
-    const formO = document.querySelector('selectFormO')
-    const formT = document.querySelector('selectFormT')
-    console.log(formO, formT, rows);
+    divsDiv.innerHTML = ''
+    const formO = document.querySelector('#selectFormO')
+    const formT = document.querySelector('#selectFormT')
+
+    const sortedRows = rows.sort(function (row1, row2) {
+
+        if(formT.value == 'asc'){
+            if(formO.value == 'id'){
+                return row1.id - row2.id
+            }
+            if(formO.value == 'userId'){
+                return row1.userId - row2.userId
+            }
+
+            if(formO.value == 'title'){
+            {if (row1.title < row2.title){return -1}
+            if (row1.title > row2.title){return 1}
+            return 0}}
+            if(formO.value == 'body'){
+            {if (row1.body < row2.body){return -1}
+            if (row1.body > row2.body){return 1}
+            return 0}}
+        }
+
+        else if(formT.value == 'desc'){
+            if(formO.value == 'id'){
+                return row2.id - row1.id
+            }
+            if(formO.value == 'userId'){
+                return row2.userId - row1.userId
+            }
+
+            if(formO.value == 'title'){
+            {if (row2.title < row1.title){return -1}
+            if (row2.title > row1.title){return 1}
+            return 0}}
+            if(formO.value == 'body'){
+            {if (row2.body < row1.body){return -1}
+            if (row2.body > row1.body){return 1}
+            return 0}}
+        }   
+    })
+    
+    //console.log(formO.value, formT.value, rows, rows.id, sortedRows);
+    buildDivs(sortedRows)
 }
 
+
+
+fBtnT.addEventListener('click', sortRows)
+fBtnT.addEventListener('click', sortRows)
 getPosts()
-sortRows()
