@@ -7,7 +7,7 @@
     box-sizing: border-box;
     position: relative;
 } 
-  
+
 #main{
     margin: auto;
     background-color: #F08A5D;
@@ -28,6 +28,7 @@
     padding: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
+    border-radius: 25px;
 }
 
 #form{
@@ -170,7 +171,7 @@
     background-color: #f90;
     border: 1px solid #ddb500;
     border-radius: 50%;
-    margin: 0% 0% 10% 70%;
+    margin: -1.5% 0% 7% 78%;
     padding: 2px;
     font-size: 26px;
     text-decoration: none;
@@ -232,12 +233,13 @@
 .divUnder{
     background-color: #b60000;
     font-size: 20px;
+    padding: 10px;
 }
 
 #divs{
     width: 458px;
     height: 100%;
-    background-color: #b60000; 
+    background-color: #f08a5d; 
 }
 
 #filtersForm{
@@ -246,16 +248,49 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    border-radius: 25px;
+    padding-bottom: 15px;
 }
 
 .filterFormC{
     background-color: #7a2d00;
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     color: #ffdbc6;
     border: 1px #6e1a00 solid;
 }
 
 .filterFormC::placeholder{
     color: #aa704f;
+}
+
+#fBtn{
+    background-color: #ff3333;
+    color: rgb(255, 159, 159);
+    height: 30px;
+    padding: 5px;
+    border: 0px;
+    border-radius: 5px;
+}
+
+#fBtnT{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    background-color: #ff0000;
+    color: rgb(255, 159, 159);
+    height: 20px;
+    padding: 5px;
+    border: 0px;
+    border-radius: 5px;
+}
+
+#selectFormO, #selectFormT{
+    background-color: #d43200;
+    width: 100px;
+}
+
+#selectFormO > option, #selectFormT > option{
+    background-color: #942300;
+    color: wheat;
 }

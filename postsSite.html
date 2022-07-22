@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="zul.jpg">
     <title>Formularz</title>
 </head>
 <body>
 
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" id="sideBarClose">&times;</a>
-    <a href="index.html">Strona główna</a>
+    <a href="index.html" style="inline-size: 500px;">Strona główna</a>
     <a href="postsSite.html">Posty</a>
 </div>
 <span onclick="openNav()" id="sideBarOpen">☰</span>
@@ -22,8 +23,23 @@
     <form id="filtersForm">
         <input type="text" placeholder="ID" class="filterFormC" id="fId">
         <input type="text" placeholder="Tytuł" class="filterFormC" id="fTitle">
-        <input type="text" placeholder="Body" class="filterFormC" id="fBody">
+        <input type="text" placeholder="Body" class="filterFormC" id="fBody"> 
+        <button id="fBtn" type="button">Filtruj</button>
         <input type="text" placeholder="ID Użytkownika" class="filterFormC" id="fUserId">
+
+        <select id="selectFormO">
+            <option value="id">ID</option>
+            <option value="title">Tytuł</option>
+            <option value="body">Zawartość</option>
+            <option value="userid">ID Użytkownika</option>
+        </select>
+
+            <button id="fBtnT" type="button">Sortuj</button>
+
+        <select id="selectFormT">
+            <option value="ros">Rosnąco</option>
+            <option value="mal">Malejąco</option>
+        </select>
     </form>
 
     <div id="divs">
@@ -32,6 +48,7 @@
 
 </div>
     
-    <script src="api.js" type="module"></script>
+    <script src="posts.js" type="module"></script>
+    <script src="sort.js" type="module"></script>
 </body>
 </html>
